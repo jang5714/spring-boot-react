@@ -11,7 +11,7 @@ import java.util.List;
 
 @Data @Entity
 @Component @Table(name ="users")
-public class UserDto {
+public class User {
     @Id
     @Column(name = "user_id")
     @GeneratedValue
@@ -22,7 +22,8 @@ public class UserDto {
     @Column(length = 50)@NotNull private String name;
     @Column(length = 50)@NotNull private String email;
     @Column(name="reg_date", length = 20)@NotNull private String regDate;
-    @OneToMany(mappedBy = "user")
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private List<Article> articlelist = new ArrayList<>();
 
 }

@@ -3,7 +3,7 @@ package shop.jarviis.app.Cloud.board.domain;
 import com.sun.istack.NotNull;
 import lombok.Data;
 import org.springframework.stereotype.Component;
-import shop.jarviis.app.Cloud.user.domain.UserDto;
+import shop.jarviis.app.Cloud.user.domain.User;
 
 import javax.persistence.*;
 
@@ -20,9 +20,9 @@ public class Article {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", insertable = false, updatable = false) //불변 바꿀수 없게 한다.
-    private UserDto user;
+    private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "item_id", insertable = false, updatable = false)
-    private UserDto item;
+    private User item;
 }

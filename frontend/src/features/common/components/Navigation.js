@@ -9,21 +9,46 @@ import React, { useState } from 'react';
 //   selectCount,
 // } from '../counterSlice';
 import { Link } from 'react-router-dom'
+import styled from 'styled-components'
 
 
 export default function Navigation() {
   
   return (
-    <div>
-        <ul>
-            <li><Link to="home">Home</Link></li>
-            <li><Link to="useradd">UserAdd</Link></li>
-            <li><Link to="userdetail">UserDetail</Link></li>
-            <li><Link to="userlist">UserList</Link></li>
-            <li><Link to="userlogin">UserLogin</Link></li>
-            <li><Link to="usermodify">UserModify</Link></li>
-            <li><Link to="userremove">UserRemove</Link></li>
-        </ul>
-    </div>
+    <Nav>
+        <NavList>
+            <NavItem><Link to="home">Home</Link></NavItem>
+            <NavItem><Link to="useradd">UserAdd</Link></NavItem>
+            <NavItem><Link to="userdetail">UserDetail</Link></NavItem>
+            <NavItem><Link to="userlist">UserList</Link></NavItem>
+            <NavItem><Link to="userlogin">UserLogin</Link></NavItem>
+            <NavItem><Link to="usermodify">UserModify</Link></NavItem>
+            <NavItem><Link to="userremove">UserRemove</Link></NavItem>
+        </NavList>
+    </Nav>
   );
 }
+
+const Nav = styled.div`
+    width: 100%;
+    height: 30px;
+    border-bottom: 1px solid #d1d8e4;
+    color: white;
+    z-index: 5;
+    margin-bottom: 100px
+`
+
+const NavList = styled.ul`
+    width: 1080px;
+    display: flex;
+    margin: 0 auto;
+    color: white;
+`
+
+const NavItem = styled.li`
+    width: auto;
+    margin-left: 18px;
+    margin-top: 5px;
+    display: flex;
+    color: white;
+`

@@ -1,27 +1,35 @@
 package shop.jarviis.app.Cloud.user.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import shop.jarviis.app.Cloud.user.domain.User;
-import shop.jarviis.app.Cloud.user.domain.UserSerializer;
+import shop.jarviis.app.Cloud.user.domain.UserDto;
 import shop.jarviis.app.Cloud.user.service.UserService;
 
 import java.util.Optional;
 
+@CrossOrigin("*")
 @RequiredArgsConstructor
 @RestController
+@RequestMapping("/users")
 public class UserController{
     private final UserService userService;
 
-    @GetMapping("/users/{id}")
-    public ResponseEntity<UserSerializer> getById(@PathVariable long id) throws JsonProcessingException {
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@RequestBody User user){
+
+        String returnUser = userService.login(user.getUsername(), user.getPassword());
+        System.out.println("마리아DB에서 넘어온 정보: "+returnUser.toString());
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<UserDto> getById(@PathVariable long id){
+        System.out.println("------------------");
         User user = userService.findById(id).get();
-        UserSerializer userSerializer = UserSerializer.builder()
+        UserDto userSerializer = UserDto.builder()
                 .userId(user.getUserId())
                 .username(user.getUsername())
                 .password(user.getPassword())

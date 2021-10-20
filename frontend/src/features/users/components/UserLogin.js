@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 // import { useSelector, useDispatch } from 'react-redux';
 // import {
 //   decrement,
@@ -15,6 +16,7 @@ export default function UserLogin() {
   const SERVER = 'http://localhost:8080'
   const [login, setLogin] = useState({})
   const {username, password} = login
+  const history = useHistory()
 
   const handleChange = e => {
     const {value, name} = e.target
@@ -30,13 +32,14 @@ export default function UserLogin() {
   const handleClick = e => {
     e.preventDefault()
     const loginRequest = {username, password}
-    alert('로그인 정보: '+JSON.stringify(loginRequest))
     userLogin(loginRequest)
     .then(res => {
-      alert('로그인 성공, '+res)
+      alert('로그인 성공, '+JSON.stringify(res.data))
+      localStorage.setItem('sessionUser', JSON.stringify(res.data))
+      history.push("/users/detail")
     })
     .catch(err => {
-      alert('로그인 실패')
+      alert('로그인 실패' + err)
     })
 
   }

@@ -1,6 +1,8 @@
 package shop.jarviis.app.Cloud.user.controller;
-
+import org.modelmapper.ModelMapper;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,14 +17,18 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/users")
 public class UserController{
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private final UserService userService;
 
-    @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody User user){
+    @PostMapping()
+    public ResponseEntity<Optional<User>> join(@RequestBody User user){
+        logger.info(String.format("User Join Info is %s", user.toString()));
+        return null;
+    }
 
-        String returnUser = userService.login(user.getUsername(), user.getPassword());
-        System.out.println("마리아DB에서 넘어온 정보: "+returnUser.toString());
-        return new ResponseEntity<>(HttpStatus.OK);
+    @PostMapping("/login")
+    public ResponseEntity<User> login(@RequestBody UserDto user){
+        return ResponseEntity.ok(userService.login(user.getUsername(), user.getPassword()).get());
     }
 
     @GetMapping("/{id}")

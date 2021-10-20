@@ -18,12 +18,12 @@ export default function Navigation() {
     <Nav>
         <NavList>
             <NavItem><Link to="home">Home</Link></NavItem>
-            <NavItem><Link to="useradd">UserAdd</Link></NavItem>
-            <NavItem><Link to="userdetail">UserDetail</Link></NavItem>
-            <NavItem><Link to="userlist">UserList</Link></NavItem>
-            <NavItem><Link to="userlogin">UserLogin</Link></NavItem>
-            <NavItem><Link to="usermodify">UserModify</Link></NavItem>
-            <NavItem><Link to="userremove">UserRemove</Link></NavItem>
+            <NavItem><Link to="/users/add">UserAdd</Link></NavItem>
+            <NavItem><Link to="/users/detail">UserDetail</Link></NavItem>
+            <NavItem><Link to="/users/list">UserList</Link></NavItem>
+            <NavItem><Link to="/users/login">UserLogin</Link></NavItem>
+            <NavItem><Link to="/users/modify">UserModify</Link></NavItem>
+            <NavItem><Link to="/users/remove">UserRemove</Link></NavItem>
         </NavList>
     </Nav>
   );

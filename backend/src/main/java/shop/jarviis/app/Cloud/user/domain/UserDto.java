@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-
+@NoArgsConstructor
 @Getter @Setter @ToString
 public class UserDto implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -30,7 +30,7 @@ public class UserDto implements Serializable {
         this.email = email;
         this.regDate = regDate;
     }
-    @Builder
+//    @Builder
     UserDto(long userId, String username, String password, String name,
             String email, String regDate, List<Article> articleList ){
         this.userId = userId;

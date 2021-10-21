@@ -12,7 +12,7 @@ import javax.persistence.*;
 public class Article {
     @Id //primary key
     @Column(name = "article_id") //primary key 설정
-    @GeneratedValue // 자동으로 시리얼 넘버 생성
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // 자동으로 시리얼 넘버 생성
     private long articleId;
     @Column(length = 50)@NotNull private String title;
     @Column(length = 200)@NotNull private String content;

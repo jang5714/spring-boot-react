@@ -18,7 +18,8 @@ import java.util.List;
 public class ItemDto {
     @Id
     @Column(name = "item_id")
-    @GeneratedValue
+
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long itemId;
 
     @Column(name = "item_brand", length = 20)@NotNull private String itemBrand;

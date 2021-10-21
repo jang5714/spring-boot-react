@@ -2,6 +2,7 @@ package shop.jarviis.app.Cloud.user.domain;
 
 import com.sun.istack.NotNull;
 import lombok.Data;
+import org.hibernate.annotations.Proxy;
 import org.springframework.stereotype.Component;
 import shop.jarviis.app.Cloud.board.domain.Article;
 
@@ -9,12 +10,12 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Data @Entity
+@Data @Entity @Proxy(lazy = false)
 @Component @Table(name ="users")
 public class User {
     @Id
     @Column(name = "user_id")
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long userId;
 
     @Column(length = 50)@NotNull private String username;

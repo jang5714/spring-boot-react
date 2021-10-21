@@ -30,16 +30,16 @@ public class UserDto implements Serializable {
         this.email = email;
         this.regDate = regDate;
     }
-//    @Builder
-    UserDto(long userId, String username, String password, String name,
-            String email, String regDate, List<Article> articleList ){
-        this.userId = userId;
-        this.username = username;
-        this.password = password;
-        this.name = name;
-        this.email = email;
-        this.regDate = regDate;
-        this.articleList = articleList;
-    }
+////    @Builder
+//    UserDto(long userId, String username, String password, String name,
+//            String email, String regDate, List<Article> articleList ){
+//        this.userId = userId;
+//        this.username = username;
+//        this.password = password;
+//        this.name = name;
+//        this.email = email;
+//        this.regDate = regDate;
+//        this.articleList = articleList;
+//    }
 
 }

@@ -24,31 +24,36 @@ public class UserController implements CommonController<User, Long> {
     private final UserService userService;
     private final UserRepository userRepository;
 
-
     @PostMapping("/login")
     public ResponseEntity<User> login(@RequestBody UserDto user){
-        return ResponseEntity.ok(userService.login(user.getUsername(), user.getPassword()).get());
+        return ResponseEntity.ok(
+                userService.login(user.getUsername(), user.getPassword()).orElse(new User()));
     }
-
     @Override
     @GetMapping("/{id}")
-    public ResponseEntity<User> getById(@PathVariable Long id){
-        System.out.println("getById 컨트롤러");
-        System.out.println("임시로 뽑은 유저 객체: "+userRepository.getById(id).toString());
+    public ResponseEntity<User> getById(@PathVariable Long id) {
         return ResponseEntity.ok(userRepository.getById(id));
     }
-
+    @GetMapping()
     @Override
     public ResponseEntity<List<User>> findAll() {
         return ResponseEntity.ok(userRepository.findAll());
     }
 
-    @PostMapping()
+
+    @PostMapping
     @Override
     public ResponseEntity<String> save(@RequestBody User user) {
-        logger.info(String.format("회원가입 정조: %s", user.toString()));
+        logger.info(String.format("회원가입 정보: %s", user.toString()));
         userRepository.save(user);
         return ResponseEntity.ok("SUCCESS");
+    }
+
+    @PutMapping
+    public ResponseEntity<User> update(@RequestBody User user) {
+        logger.info(String.format("회원수정 정보: %s", user.toString()));
+        userRepository.save(user);
+        return ResponseEntity.ok(userRepository.getById(user.getUserId()));
     }
 
     @Override
@@ -65,10 +70,12 @@ public class UserController implements CommonController<User, Long> {
     public ResponseEntity<Long> count() {
         return ResponseEntity.ok(userRepository.count());
     }
-
+    @DeleteMapping("/{id}")
     @Override
-    public ResponseEntity<String> deleteById(Long id) {
+    public ResponseEntity<String> deleteById(@PathVariable Long id) {
         userRepository.deleteById(id);
         return ResponseEntity.ok("SUCCESS");
     }
+
+
 }

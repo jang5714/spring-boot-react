@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 // import { useSelector, useDispatch } from 'react-redux';
@@ -27,16 +26,10 @@ export default function UserAdd() {
             [name] :  value
         })
     }
-    const userJoin = joinRequest => 
-                axios.post(`${SERVER}/users`, JSON.stringify(joinRequest),{headers})
-    const headers = {
-        'Content-Type' : 'application/json',
-        'Authorization' : 'JWT fefege..'
-      }
+  
     const handleSubmit = e => {
         e.preventDefault()
         const joinRequest = {...join}
-        alert(`회원가입 정보 : ${JSON.stringify(joinRequest)}`)
         userJoin(joinRequest)
         .then(res =>{
             alert('회원가입 성공')

@@ -1,32 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-// import { useSelector, useDispatch } from 'react-redux';
-// import {
-//   decrement,
-//   increment,
-//   incrementByAmount,
-//   incrementAsync,
-//   incrementIfOdd,
-//   selectCount,
-// } from './counterSlice';
-
+import { useDispatch } from 'react-redux';
+import { JoinPage } from 'features/users/userSlice.reducer'
 
 export default function UserAdd() {
     const history = useHistory()
-    const SERVER = 'http://localhost:8080'
+    const dispatch = useDispatch()
     const [join, setJoin] = useState({
         username: '', password: '', email: '', name: '', regDate : new Date().toLocaleDateString()
     })
     const {username, password, email, name} = join
-
-    const handleChange = e => {
-        const{value, name} = e.target
-        setJoin({
-            ...join,
-            [name] :  value
-        })
-    }
-  
+    const handleChange = useCallback (
+        e => {
+            const{value, name} = e.target
+            setJoin({
+                ...join,
+                [name] :  value
+            })
+        }, [join]
+    )
     const handleSubmit = e => {
         e.preventDefault()
         const joinRequest = {...join}

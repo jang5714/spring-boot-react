@@ -24,7 +24,7 @@ export default function UserAdd() {
     const handleSubmit = async (e) => {
         e.preventDefault()
         e.stopPropagation()
-        
+
         const json = {
             'username': join.username,
             'password': join.password,
@@ -33,7 +33,7 @@ export default function UserAdd() {
             'regDate': join.regDate
         }
         alert(`회원가입 정보: ${JSON.stringify(json)}`)
-        await dispatch(joinPage(json))
+        await dispatch(joinPage(json)) // joinPage 에게 json을 연결
         alert(`${join.username} 회원가입 환영`)
         history.push('/users/login')
 

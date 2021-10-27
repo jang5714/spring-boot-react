@@ -5,10 +5,12 @@ import './App.css';
 import { Route, Redirect, Switch } from 'react-router';
 import {Home, Navigation }from 'features/common';
 import {UserAdd, UserDetail, UserList, UserLogin, UserModify, UserRemove} from 'features/users'
+import { BrowserRouter as Router } from 'react-router-dom'
 
 const App= () => {
   return (
     <div className="App">
+      <Router>
       <Navigation/>
       <Switch>
         <Route exact path='/' component= {Home}/>
@@ -20,6 +22,7 @@ const App= () => {
         <Route exact path='/users/modify' component={UserModify}/>
         <Route exact path='/users/remove' component={UserRemove}/>
       </Switch>
+      </Router>
     </div>
   );
 }

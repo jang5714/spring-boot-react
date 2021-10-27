@@ -34,10 +34,10 @@ export const modifyPage = createAsyncThunk('users/modify', userModifyPage)
 export const removePage = createAsyncThunk('users/remove', userRemovePage)
 
 const userSlice = createSlice({
-  name: users,
+  name: 'users',
   initialState: {
     userState: {
-      username: '', password: '', email: '', name: '', regDate: ''
+      username: '', password: '', email: '', name: '', regDate: new Date().toLocaleDateString()
     },
     type: '',
     keyword: '',
@@ -46,16 +46,18 @@ const userSlice = createSlice({
   },
   reducers: {},
   extraReducers:{
-    [joinPage.fulfilled]: (state, action) => {state.userState = action.payload},
-    [detailPage.fulfilled]: (state, {meta, payload}) => {state.userState = action.payload},
-    [listPage.fulfilled]: (state, {meta, payload} ) => {state.pageReult = action.payload},
+    [joinPage.fulfilled]: (state, action) => {
+      state.userState = action.payload
+    },
+    [detailPage.fulfilled]: (state, {meta, payload}) => {state.userState = payload},
+    [listPage.fulfilled]: (state, {meta, payload} ) => {state.pageReult = payload},
     [loginPage.fulfilled]: (state, {meta, payload}) => {
       state.userState = payload
       window.localStorage.setItem('sessionUser', JSON.stringify(payload))
     },
     [modifyPage.fulfilled]: (state, action) => {
       state.userState = action.payload
-      window.localStorage.setItem('sessionUser', JSON.stringify(payload))
+      window.localStorage.setItem('sessionUser', JSON.stringify(action.payload))
     },
     [removePage.fulfilled]: (state, {meta, payload}) => {
       state.userState = payload
@@ -65,8 +67,7 @@ const userSlice = createSlice({
 
 })
 
-
-export const currentUserState = (state) => state.users.userState
-export const currentUserParam = (state) => state.users.userState
+export const currentUserState = state => state.users.userState
+export const currentUserParam = state => state.users.param
 export default userSlice.reducer;
 

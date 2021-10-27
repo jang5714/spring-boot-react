@@ -6,11 +6,11 @@ const userJoinPage = async(x) => {
   return res.data
 }
 const userDetailPage = async(x) => {
-  const res = await userAPI.userFetchOne(x)
+  const res = await userAPI.userDetail(x)
   return res.data
 }
 const userListPage = async() => {
-  const res = await userAPI.userFetchList()
+  const res = await userAPI.userList()
   return res.data
 }
 const userLoginPage = async(x) => {
@@ -64,6 +64,8 @@ const userSlice = createSlice({
   }
 
 })
+
+
 export const currentUserState = (state) => state.users.userState
 export const currentUserParam = (state) => state.users.userState
 export default userSlice.reducer;

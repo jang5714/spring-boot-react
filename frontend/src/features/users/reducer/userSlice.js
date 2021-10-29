@@ -14,7 +14,7 @@ const userListPage = async() => {
   return res.data
 }
 const userLoginPage = async(x) => {
-  const res = await userAPI.userJoin(x)
+  const res = await userAPI.userLogin(x)
   return res.data
 }
 const userModifyPage = async(x) => {

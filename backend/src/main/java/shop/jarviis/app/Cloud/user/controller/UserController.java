@@ -26,8 +26,7 @@ public class UserController implements CommonController<User, Long> {
 
     @PostMapping("/login")
     public ResponseEntity<User> login(@RequestBody UserDto user){
-        return ResponseEntity.ok(
-                userService.login(user.getUsername(), user.getPassword()).orElse(new User()));
+        return ResponseEntity.ok(userService.login(user.getUsername(), user.getPassword()).orElse(new User()));
     }
     @Override
     @GetMapping("/{id}")
@@ -39,7 +38,6 @@ public class UserController implements CommonController<User, Long> {
     public ResponseEntity<List<User>> findAll() {
         return ResponseEntity.ok(userRepository.findAll());
     }
-
 
     @PostMapping
     @Override

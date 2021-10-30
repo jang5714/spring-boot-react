@@ -2,77 +2,81 @@ import React, { useState, useCallback } from 'react';
 import { useHistory  } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { joinPage } from 'features/users/reducer/userSlice'
+import { register } from 'serviceWorker';
+import {useForm} from "react-hook-form";
+import styled from 'styled-components'
 
 
 export default function UserAdd() {
-    const history = useHistory()
+    const { register, handleSubmit, formState: { errors } } = useForm();
     const dispatch = useDispatch()
-    const [join, setJoin] = useState({
-        username:'', password:'', email:'', name:'', regDate: new Date().toLocaleDateString()
-    })
-    const {username, password, email, name} = join
-    const handleChange = useCallback(
-        e => {
-            const { value, name } = e.target
-            setJoin({
-                ...join,
-                [name] : value
-            })
-        }, [join]
-    ) 
-    
-    const handleSubmit = async (e) => {
-        e.preventDefault()
-        e.stopPropagation()
-
-        const json = {
-            'username': join.username,
-            'password': join.password,
-            'email': join.email,
-            'name': join.name,
-            'regDate': join.regDate
-        }
-        alert(`회원가입 정보: ${JSON.stringify(json)}`)
-        await dispatch(joinPage(json)) // joinPage 에게 json을 연결
-        alert(`${join.username} 회원가입 환영`)
-        history.push('/users/login')
-
-  }
-
-  return (
-    <div>
-         <h1>회원 가입을 환영합니다.</h1>
-    <form onSubmit={handleSubmit} method='POST'>
-        <ul>
-            <li>
-                <label>
-                    아이디 : <input type="text" id="username" name="username" value={username} onChange={handleChange}
-                    size="10" minlength="4" maxlength="15"/>
-                </label>
-                <small>4~15자리 이내의 영문과 숫자</small>
-            </li>
-            <li>
-                <label>
-                    이메일 : <input type="email" id="email" name="email" value={email} onChange={handleChange}/>
-                </label>
-            </li>
-            <li>
-                <label>
-                    비밀 번호 : <input type="password" id="password" name="password" value={password} onChange={handleChange}/>
-                </label>
-            </li>
-            <li>
-                <label>
-                    이름 : <input type="text" id="name" name="name" value={name} onChange={handleChange}/>
-                </label>
-            </li>
-           
-            <li>
-                <input type="submit" onClick={ e => handleSubmit(e)} value="회원가입"/>
-            </li>
-
-        </ul>
-    </form>
-    </div>
+    return (
+        <div>
+            <h1>회원 가입을 환영합니다.</h1>
+        <form onSubmit={handleSubmit(async ({data}) => {await dispatch(joinPage({...data, 
+                                                    regDate: new Date().toLocaleDateString()}))})} method='POST'>
+            <ul>
+                <li>
+                    <label>
+                        아이디 : <input type="text" id="username" 
+                        aria-invalid={errors.name ? "true" : "false"}
+                        {...register('username', {required: true, maxlength:30})}
+                        size="10" minlength="1" maxlength="15"/>
+                    </label>
+                        {/* use role="alert" to announce the error message */}
+                        {errors.username && errors.username.type === "required" && (
+                        <Span role="alert">아이디를 입력해 주세요</Span>
+                        )}
+                    <br/>
+                    <small>4~15자리 이내의 영문과 숫자</small>
+                </li>
+                <li>
+                    <label>
+                        이메일 : <input type="email" id="email"  
+                        aria-invalid={errors.name ? "true" : "false"}
+                        {...register('email', {required: true, maxlength:30})}
+                    />
+                        {/* use role="alert" to announce the error message */}
+                        {errors.email && errors.email.type === "required" && (
+                            <Span role="alert">이메일을 입력해 주세요!</Span>
+                        )}
+                    </label>
+                    
+                </li>
+                <li>
+                    <label>
+                        비밀 번호 : <input type="password" id="password" 
+                        aria-invalid={errors.name ? "true" : "false"}
+                        {...register('password', {required: true, maxlength:30})}
+                    />
+                        {/* use role="alert" to announce the error message */}
+                        {errors.password && errors.password.type === "required" && (
+                            <Span role="alert">비밀번호를 입력해 주세요</Span>
+                        )}
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        이름 : <input type="text" id="name"  
+                        aria-invalid={errors.name ? "true" : "false"}
+                        {...register('name', {required: true, maxlength:30})}
+                        />
+                        {/* use role="alert" to announce the error message */}
+                        {errors.name && errors.name.type === "required" && (
+                            <Span role="alert">이름을 입력해 주세요</Span>
+                        )}
+                    </label>
+                </li>
+                <li>
+                    <input type="submit" onClick={ e => handleSubmit(e)} value="회원가입"/>
+                </li>
+            </ul>
+        </form>
+        </div>
   );
 }
+
+const Span = styled.span`
+    color: red;
+    font-weight: bold;
+`

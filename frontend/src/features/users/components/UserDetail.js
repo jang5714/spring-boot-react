@@ -11,7 +11,7 @@ export default function UserDetail() {
 
     const userDetail = () => {
         const sessionUser = JSON.parse(localStorage.getItem('sessionUser'))
-        alert('사용자 아이디: ' +sessionUser.userId)
+        alert('사용자 아이디: ' +sessionUser.username)
         userDetail(sessionUser)
         .then(res => {
             setDetail(res.data)
@@ -33,7 +33,6 @@ export default function UserDetail() {
   return (
     <div>
         <h1>회원 정보</h1>
-
         <ul>
             <li>
                 <label>
@@ -57,8 +56,6 @@ export default function UserDetail() {
             </li>
             <li>
                 <input type="button" value="회원정보수정" onClick={()=> history.push('/users/modify')}/>
-            </li>
-            <li>
                 <input type="button" value="로그아웃" onClick={logout}/>
             </li>
         </ul>

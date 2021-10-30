@@ -12,6 +12,8 @@ import shop.jarviis.app.Cloud.user.domain.UserDto;
 import shop.jarviis.app.Cloud.user.repository.UserRepository;
 import shop.jarviis.app.Cloud.user.service.UserService;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,6 +35,7 @@ public class UserController implements CommonController<User, Long> {
     public ResponseEntity<User> getById(@PathVariable Long id) {
         return ResponseEntity.ok(userRepository.getById(id));
     }
+
     @GetMapping()
     @Override
     public ResponseEntity<List<User>> findAll() {

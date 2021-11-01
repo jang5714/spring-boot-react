@@ -32,6 +32,7 @@ export const listPage = createAsyncThunk('users/list', userListPage)
 export const loginPage = createAsyncThunk('users/login', userLoginPage)
 export const modifyPage = createAsyncThunk('users/modify', userModifyPage)
 export const removePage = createAsyncThunk('users/remove', userRemovePage)
+
 export const logoout = () => {
   window.localStorage.setItem('sessionUser', '')
   window.location.href='/home'

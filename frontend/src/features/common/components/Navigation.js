@@ -17,7 +17,7 @@ export default function Navigation() {
   return (
     <Nav>
         <NavList>
-            <NavItem><Link to="home">Home</Link></NavItem>
+            <NavItem><Link to="/home">Home</Link></NavItem>
             <NavItem><Link to="/users/add">UserAdd</Link></NavItem>
             <NavItem><Link to="/users/detail">UserDetail</Link></NavItem>
             <NavItem><Link to="/users/list">UserList</Link></NavItem>

@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import axios from 'axios';
+import React, { useCallback, useState } from 'react';
 import { useHistory  } from 'react-router-dom';
 
 export default function UserModify() {
@@ -20,22 +21,28 @@ export default function UserModify() {
             [name] : value
         })
     }
+    const headers = {
+        'Content-Type' : 'application/json',
+        'Authorization': 'JWT fefege..'
+      }
     
-    
-    const handleSubmit = e => {
-        e.preventDefault()
+    const handleSubmit = useCallback(
+        e => {
+            e.preventDefault()
         const modifyRequest = {...modify}
-        UserModify(modifyRequest)
+        alert(`회원수정 정보: ${JSON.stringify(modifyRequest)}`)
+        axios.put(`http://localhost:8080/users`, JSON.stringify(modifyRequest),{headers})
         .then(res =>{
-            alert('회원 정보 수정 성공')
+            alert(`회원 정보 수정 성공 ${res.data}`)
             localStorage.setItem('sessionUser', JSON.stringify(res.data))
             history.push("/users/detail")
         })
         .catch(err =>{
             alert(`회원수정 실패 : ${err}`)
         })
+        }
+    )
 
-  }
 
   return (
     <div>

@@ -33,10 +33,6 @@ export const loginPage = createAsyncThunk('users/login', userLoginPage)
 export const modifyPage = createAsyncThunk('users/modify', userModifyPage)
 export const removePage = createAsyncThunk('users/remove', userRemovePage)
 
-export const logoout = () => {
-  window.localStorage.setItem('sessionUser', '')
-  window.location.href='/home'
-}
 const changeNull = ls =>{
   for(const i of ls ){
     document.getElementById(i).value = ''
@@ -76,7 +72,7 @@ const userSlice = createSlice({
     },
     [modifyPage.fulfilled]: (state, action) => {
       state.userState = action.payload
-      window.localStorage.setItem('sessionUser', JSON.stringify(action.payload))
+      window.location.href = "/users/detail"
     },
     [removePage.fulfilled]: (state, {meta, payload}) => {
       state.userState = payload

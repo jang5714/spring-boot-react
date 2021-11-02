@@ -1,9 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { UserListForm } from '..';
+import { useDispatch, useSelector } from 'react-redux';
+import { listPage } from '../reducer/userSlice';
+import { produceWithPatches } from 'immer';
+
 
 
 export default function UserList() {
+  const dispatch = useDispatch()
   const [list, setList] = useState([])
+  const users = useSelector((state) => state.users[produceWithPatches.id])
  
   const userList = () => {
       userList()
@@ -12,7 +18,7 @@ export default function UserList() {
   }
 
   useEffect(() =>{
-    userList() 
+    dispatch(listPage) 
   }, [])
   return (
     <div>

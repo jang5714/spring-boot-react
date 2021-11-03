@@ -49,6 +49,7 @@ const userSlice = createSlice({
     params: {}
 
   },
+  usersState:[],
   reducers: {},
   extraReducers:{
     [joinPage.fulfilled]: (state, action) => {
@@ -56,7 +57,7 @@ const userSlice = createSlice({
       window.location.href = `/users/login`
     },
     [detailPage.fulfilled]: (state, {meta, payload}) => {state.userState = payload},
-    [listPage.fulfilled]: (state, {meta, payload} ) => {state.pageReult = payload},
+    [listPage.fulfilled]: (state, {meta, payload} ) => {state.usersState = payload},
     [loginPage.fulfilled]: (state, {meta, payload}) => {
       state.userState = payload
       window.localStorage.setItem('sessionUser', JSON.stringify(payload))
@@ -72,11 +73,13 @@ const userSlice = createSlice({
     },
     [modifyPage.fulfilled]: (state, action) => {
       state.userState = action.payload
+      // localStorage.setItem('sessionUser',JSON.stringify(action))
       window.location.href = "/users/detail"
     },
     [removePage.fulfilled]: (state, {meta, payload}) => {
       state.userState = payload
-      window.localStorage.setItem('sessionUser', '')
+      window.localStorage.clear()
+      window.localStorage.removeItem()
     }
   }
 

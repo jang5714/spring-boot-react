@@ -2,18 +2,20 @@ import React from 'react';
 import { Link } from 'react-router-dom'
 import styled from "styled-components";
 
-export default function Navigation() {
+const Navigation = () => {
   
   return (
     <div>
         <Ul>
-            <Li><Link to="/home">Home</Link></Li>
-            <Li><Link to="/users/add">UserAdd</Link></Li>
-            <Li><Link to="/users/detail">UserDetail</Link></Li>
-            <Li><Link to="/users/list">UserList</Link></Li>
-            <Li><Link to="/users/login">UserLogin</Link></Li>
-            <Li><Link to="/users/modify">UserModify</Link></Li>
-            <Li><Link to="/users/remove">UserRemove</Link></Li>
+            <Li><Link to="/home" style={{ textDecoration: 'none' }}>Home</Link></Li>
+            {localStorage.length > 0 ? <></>
+              : <Li><Link to="/users/add" style={{ textDecoration: 'none' }}>UserAdd</Link></Li>}
+            <Li><Link to="/users/detail" style={{ textDecoration: 'none' }}>UserDetail</Link></Li>
+            <Li><Link to="/users/list" style={{ textDecoration: 'none' }}>UserList</Link></Li>
+            {localStorage.length > 0 ? <></>
+             : <Li><Link to="/users/login" style={{ textDecoration: 'none' }}>UserLogin</Link></Li>}
+            <Li><Link to="/users/modify" style={{ textDecoration: 'none' }}>UserModify</Link></Li>
+            <Li><Link to="/users/remove" style={{ textDecoration: 'none' }}>UserRemove</Link></Li>
         </Ul>
     </div>
   );
@@ -31,3 +33,5 @@ font-size:20px;
 text-align:center;
 display:inline-block;
 `
+
+export default Navigation

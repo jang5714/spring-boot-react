@@ -17,6 +17,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+
 @CrossOrigin("*")
 @RequiredArgsConstructor
 @RestController
@@ -39,6 +40,12 @@ public class UserController implements CommonController<User, Long> {
     @GetMapping()
     @Override
     public ResponseEntity<List<User>> findAll() {
+        return ResponseEntity.ok(userRepository.findAll());
+    }
+
+    @GetMapping("/list/{page}")
+    public ResponseEntity<List<User>> getList(@PathVariable int page) {
+        System.out.println("::::::: PageNumber :::::::: "+page);
         return ResponseEntity.ok(userRepository.findAll());
     }
 

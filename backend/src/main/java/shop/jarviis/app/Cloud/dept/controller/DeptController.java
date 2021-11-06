@@ -1,7 +1,70 @@
 package shop.jarviis.app.Cloud.dept.controller;
 
-import org.springframework.web.bind.annotation.RestController;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import shop.jarviis.app.Cloud.common.CommonController;
+import shop.jarviis.app.Cloud.dept.domain.Dept;
+import shop.jarviis.app.Cloud.dept.domain.DeptDto;
+import shop.jarviis.app.Cloud.dept.domain.DeptInfo;
+import shop.jarviis.app.Cloud.dept.repository.DeptRepository;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Optional;
+
+@CrossOrigin("*")
+@RequiredArgsConstructor
 @RestController
-public class DeptController {
+@RequestMapping("/dept")
+public class DeptController implements CommonController<Dept, Long> {
+    private final DeptRepository deptRepository;
+
+    @GetMapping("/find-depts-by-emp-count/{count}")
+    public ResponseEntity<List<DeptInfo>> findDeptsByEmpCount(@PathVariable int count){
+        return ResponseEntity.ok(deptRepository.findEmployeesByDeptNo(count).orElse(new ArrayList<>()));
+    }
+
+    @GetMapping("/find-dept-which-has-max-emp-count")
+    public ResponseEntity<List<DeptInfo>> findDeptWhichHasMaxEmpCount(){
+        return ResponseEntity.ok(deptRepository.findDeptWhichHasMaxEmpCount());
+    }
+
+
+    @Override
+    public ResponseEntity<List<Dept>> findAll() {
+        return null;
+    }
+
+    @Override
+    public ResponseEntity<Dept> getById(Long id) {
+        return null;
+    }
+
+    @Override
+    public ResponseEntity<String> save(Dept entity) {
+        return null;
+    }
+
+    @Override
+    public ResponseEntity<Optional<Dept>> findById(Long id) {
+        return null;
+    }
+
+    @Override
+    public ResponseEntity<Boolean> existsById(Long id) {
+        return null;
+    }
+
+    @Override
+    public ResponseEntity<Long> count() {
+        return null;
+    }
+
+    @Override
+    public ResponseEntity<String> deleteById(Long id) {
+        return null;
+    }
 }

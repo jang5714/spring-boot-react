@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 import shop.jarviis.app.Cloud.common.CommonController;
 import shop.jarviis.app.Cloud.emp.domain.Emp;
 import shop.jarviis.app.Cloud.emp.domain.EmpDto;
-import shop.jarviis.app.Cloud.emp.repository.EmpRepository;
+
 
 import java.util.List;
 import java.util.Optional;
@@ -15,10 +15,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/emp")
-public class EmpController implements CommonController<Emp, Long> {
-    private final EmpRepository empRepository;
-
-    public ResponseEntity<EmpDto> findEmploy
+public class EmpController<EmpRepository> implements CommonController<Emp, Long> {
 
     @Override
     public ResponseEntity<List<Emp>> findAll() {
